@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brain Tumor Detection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        body {
+            background-color: #f0f8ff;
+            min-height: 100vh;
+        }
+        
+        .heading {
+            background-color: #4facfe;
+            color: #ffffff;
+            padding: 20px;
+            font-size: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+            animation: fadeIn 1s ease;
+        }
+        
+        .cont {
+            display: flex;
+            justify-content: center;
+            margin-top: 3%;
+            animation: slideUp 1s ease;
+        }
+        
+        .container {
+            border: none;
+            width: 40%;
+            min-width: 320px;
+            height: 550px;
+            border-radius: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .container .Tittle {
+            background-color: #82c0ff;
+            color: #333333;
+            padding: 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            animation: fadeIn 1.2s ease;
+        }
+        
+        .Tittle h1 {
+            margin-left: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .form-con {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100% - 70px);
+            animation: fadeIn 1.5s ease;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        input[type="file"] {
+            border: 2px dashed #82c0ff;
+            padding: 30px 20px;
+            border-radius: 10px;
+            background-color: rgba(130, 192, 255, 0.1);
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            color: #333333;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+        
+        input[type="file"]:hover {
+            background-color: rgba(130, 192, 255, 0.2);
+        }
+        
+        button {
+            background-color: #4facfe;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+            width: 80%;
+        }
+        
+        button:hover {
+            background-color: #3d96e8;
+            transform: scale(1.03);
+        }
+        
+        /* Brain Animation */
+        .brain-container {
+            margin-bottom: 20px;
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        
+        .brain {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #f8a5c2;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(248, 165, 194, 0.5);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        .brain:before {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            top: 5%;
+            left: 5%;
+            background: radial-gradient(circle at 30% 30%, #ffffff 0%, transparent 10%),
+                        radial-gradient(circle at 70% 30%, #ffffff 0%, transparent 10%),
+                        radial-gradient(circle at 30% 70%, #ffffff 0%, transparent 10%),
+                        radial-gradient(circle at 70% 70%, #ffffff 0%, transparent 10%),
+                        radial-gradient(circle at 50% 50%, #f56a8b 0%, transparent 100%);
+        }
+        
+        .brain-wave {
+            position: absolute;
+            border: 2px dashed #4facfe;
+            border-radius: 50%;
+            opacity: 0;
+            animation: brainWave 3s infinite;
+        }
+        
+        .wave1 {
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+        
+        .wave2 {
+            width: 140%;
+            height: 140%;
+            top: -20%;
+            left: -20%;
+            animation-delay: 0.5s;
+        }
+        
+        .wave3 {
+            width: 160%;
+            height: 160%;
+            top: -30%;
+            left: -30%;
+            animation-delay: 1s;
+        }
+        
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background-color: rgba(79, 172, 254, 0.7);
+            top: 0;
+            left: 0;
+            animation: scanBrain 3s infinite;
+            box-shadow: 0 0 10px rgba(79, 172, 254, 0.7);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        @keyframes brainWave {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            100% { transform: scale(1.1); opacity: 0; }
+        }
+        
+        @keyframes scanBrain {
+            0% { top: 0; }
+            50% { top: 100%; }
+            100% { top: 0; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="heading">
+                <p>AI-Powered Brain Tumor Detection</p>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <div class="cont">
+                <div class="container">
+                    <div class="Tittle">
+                        <h1>Brain Tumor Classifier</h1>
+                    </div>
+                    <div class="form-con">
+                        <div class="brain-container">
+                            <div class="brain"></div>
+                            <div class="brain-wave wave1"></div>
+                            <div class="brain-wave wave2"></div>
+                            <div class="brain-wave wave3"></div>
+                            <div class="scan-line"></div>
+                        </div>
+                        <form action="/predict" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" required>
+                            <button type="submit">Upload & Predict</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

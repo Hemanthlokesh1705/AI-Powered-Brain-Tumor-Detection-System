@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medical Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+        
+        .tumor-positive {
+            color: red;
+            animation: blinkRed 1s infinite;
+            font-weight: bold;
+        }
+        
+        .tumor-negative {
+            color: green;
+            animation: blinkGreen 1s infinite;
+            font-weight: bold;
+        }
+        
+        @keyframes blinkRed {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes blinkGreen {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .image-container {
+            margin: 20px auto;
+            max-width: 500px;
+        }
+        
+        img {
+            max-width: 100%;
+            border: 3px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        {% if "tumor" in prediction.lower() or "positive" in prediction.lower() %}
+            <span class="tumor-positive">Prediction: {{ prediction }}</span>
+        {% else %}
+            <span class="tumor-negative">Prediction: {{ prediction }}</span>
+        {% endif %}
+    </h1>
+    
+    <div class="image-container">
+        <img src="{{ image_path }}" alt="Analyzed Image">
+    </div>
+    
+    <a href="/" class="back-link">Go Back</a>
+</body>
+</html>
